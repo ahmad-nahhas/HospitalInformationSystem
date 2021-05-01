@@ -1,0 +1,27 @@
+enum Gender {
+    Male,
+    Female
+}
+
+export class Patient {
+
+    id: string;
+    name: string;
+    fileNo: number;
+    citizenId: string;
+    birthDate: Date;
+    gender: Gender;
+    natinality: string;
+    phoneNumber: string;
+    email: string;
+    contactPerson: string;
+    contactRelation: string;
+    contactPhone: string;
+    country: string;
+    city: string;
+    street: string;
+    address1: string;
+    address2: string;
+    firstVisitDate: Date;
+    recordCreationDate: Date;
+}
