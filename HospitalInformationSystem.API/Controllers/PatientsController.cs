@@ -1,5 +1,6 @@
 ﻿using HospitalInformationSystem.API.Controllers.Base;
 using HospitalInformationSystem.Shared.Entities;
+using HospitalInformationSystem.Shared.Filters;
 using HospitalInformationSystem.Shared.UnitOfWorks.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HospitalInformationSystem.API.Controllers
 {
-    public class PatientsController : ControllerBase<Patient>
+    public class PatientsController : ControllerBase<Patient, PatientFilter>
     {
         private readonly IUnitOfWork<Patient> _uow;
 

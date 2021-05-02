@@ -1,4 +1,5 @@
-﻿using HospitalInformationSystem.Shared.Filters.Interfaces;
+﻿using HospitalInformationSystem.Shared.Entities;
+using HospitalInformationSystem.Shared.Filters.Interfaces;
 using HospitalInformationSystem.Shared.UnitOfWorks.Interfaces;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,9 @@ namespace HospitalInformationSystem.API.Controllers.Base
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("Policy")]
-    public abstract class ControllerBase<T> : ControllerBase where T : class
+    public abstract class ControllerBase<T, Filter> : ControllerBase 
+        where T : class
+        where Filter:IFilter<T>
     {
         private readonly IUnitOfWork<T> _uow;
 
@@ -41,7 +44,7 @@ namespace HospitalInformationSystem.API.Controllers.Base
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<T>>> Get([FromQuery] IFilter<T> filter)
+        public async Task<ActionResult<IEnumerable<T>>> Get([FromQuery] Filter filter)
         {
             try
             {
