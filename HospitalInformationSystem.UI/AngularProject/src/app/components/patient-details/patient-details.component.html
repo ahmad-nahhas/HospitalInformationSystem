@@ -1,0 +1,61 @@
+<form ngForm="form" (submit)="SavePatient()" class="form-control">
+    <h4 class="text-center m-2">Patient Details</h4>
+    <div class="form-elements">
+        <div class="row justify-content-center mt-3">
+            <input type="hidden" name="id" [(ngModel)]="service.patient.id">
+            <input class="col-5" type="text" name="name" [(ngModel)]="service.patient.name" placeholder="Patient Name">
+            <input class="col-5 ms-3" type="number" name="fileNo" [(ngModel)]="service.patient.fileNo"
+                placeholder="File No">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="text" name="citizenId" [(ngModel)]="service.patient.citizenId"
+                placeholder="Citizen Id">
+            <input class="col-5 ms-3" type="date" name="birthDate" [(ngModel)]="service.patient.birthDate">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="number" name="gender" [(ngModel)]="service.patient.gender" placeholder="Gender">
+            <!-- <select class="col-5" name="gender" [(ngModel)]="service.patient.gender">
+                <option value="0">Male</option>
+                <option value="1">Female</option>
+            </select> -->
+            <input class="col-5 ms-3" type="text" name="natinality" [(ngModel)]="service.patient.natinality"
+                placeholder="Natinality">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="text" name="phoneNumber" [(ngModel)]="service.patient.phoneNumber"
+                placeholder="Phone Number">
+            <input class="col-5 ms-3" type="text" name="email" [(ngModel)]="service.patient.email" placeholder="Email">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="text" name="contactPerson" [(ngModel)]="service.patient.contactPerson"
+                placeholder="Contact Person">
+            <input class="col-5 ms-3" type="text" name="contactRelation" [(ngModel)]="service.patient.contactRelation"
+                placeholder="Contact Relation">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="tel" name="contactPhone" [(ngModel)]="service.patient.contactPhone"
+                placeholder="Contact Phone">
+            <input class="col-5 ms-3" type="text" name="country" [(ngModel)]="service.patient.country"
+                placeholder="Country">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="text" name="city" [(ngModel)]="service.patient.city" placeholder="City">
+            <input class="col-5 ms-3" type="text" name="street" [(ngModel)]="service.patient.street"
+                placeholder="Street">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="text" name="address1" placeholder="Address1">
+            <input class="col-5 ms-3" type="text" name="address2" [(ngModel)]="service.patient.address2"
+                placeholder="Address2">
+        </div>
+        <div class="row justify-content-center mt-2">
+            <input class="col-5" type="date" name="firstVisitDate" [(ngModel)]="service.patient.firstVisitDate"
+                placeholder="First Visit Date">
+            <input class="col-5 ms-3" type="date" name="recordCreationDate"
+                [(ngModel)]="service.patient.recordCreationDate" placeholder="Record Creation Date">
+        </div>
+        <div class="row justify-content-center mt-4 mb-3 ms-5 me-5">
+            <input class="btn btn-primary btn-lg" type="submit" value="Save">
+        </div>
+    </div>
+</form>

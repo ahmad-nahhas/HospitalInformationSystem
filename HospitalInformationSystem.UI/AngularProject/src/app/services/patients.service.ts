@@ -8,14 +8,26 @@ import { HttpClient } from '@angular/common/http';
 export class PatientsService {
 
   url = "https://localhost:44398/api/patients";
-
   patients: Patient[];
+  patient: Patient;
 
   constructor(private http: HttpClient) { }
 
-  getAll() {
-    this.http.get(this.url).toPromise().then(res => {
-      this.patients = res as Patient[];
+  get() {
+    this.http.get(this.url).toPromise().then(result => {
+      this.patients = result as Patient[];
     });
+  }
+
+  post() {
+    return this.http.post(this.url, this.patient);
+  }
+
+  put() {
+    return this.http.put(this.url, this.patient);
+  }
+
+  delete(id: any) {
+    return this.http.delete(this.url + "/" + id);
   }
 }

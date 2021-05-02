@@ -1,5 +1,6 @@
 ﻿using HospitalInformationSystem.Shared.Filters.Interfaces;
 using HospitalInformationSystem.Shared.UnitOfWorks.Interfaces;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace HospitalInformationSystem.API.Controllers.Base
 {
     [Route("api/[controller]")]
     [ApiController]
+    [EnableCors("Policy")]
     public abstract class ControllerBase<T> : ControllerBase where T : class
     {
         private readonly IUnitOfWork<T> _uow;

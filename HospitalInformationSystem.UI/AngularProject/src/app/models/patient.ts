@@ -1,16 +1,10 @@
-enum Gender {
-    Male,
-    Female
-}
-
 export class Patient {
-
     id: string;
     name: string;
     fileNo: number;
     citizenId: string;
     birthDate: Date;
-    gender: Gender;
+    gender: string;
     natinality: string;
     phoneNumber: string;
     email: string;
