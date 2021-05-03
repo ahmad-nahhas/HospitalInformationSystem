@@ -28,7 +28,7 @@ namespace HospitalInformationSystem.API
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
