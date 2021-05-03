@@ -13,11 +13,9 @@
             <input class="col-5 ms-3" type="date" name="birthDate" [(ngModel)]="service.patient.birthDate">
         </div>
         <div class="row justify-content-center mt-2">
-            <input class="col-5" type="number" name="gender" [(ngModel)]="service.patient.gender" placeholder="Gender">
-            <!-- <select class="col-5" name="gender" [(ngModel)]="service.patient.gender">
-                <option value="0">Male</option>
-                <option value="1">Female</option>
-            </select> -->
+            <select class="col-5" name="gender" value='0' [(ngModel)]="service.patient.gender">
+                <option *ngFor="let key of genderKeys" [ngValue]="key">{{ genderValues[key] }}</option>
+            </select>
             <input class="col-5 ms-3" type="text" name="natinality" [(ngModel)]="service.patient.natinality"
                 placeholder="Natinality">
         </div>

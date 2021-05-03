@@ -19,6 +19,12 @@ export class PatientsService {
     });
   }
 
+  search(search: string) {
+    this.http.get(this.url + search).toPromise().then(result => {
+      this.patients = result as Patient[];
+    });
+  }
+
   post() {
     return this.http.post(this.url, this.patient);
   }

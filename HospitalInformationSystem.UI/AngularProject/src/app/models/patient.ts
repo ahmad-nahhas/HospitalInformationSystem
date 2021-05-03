@@ -1,5 +1,7 @@
+import { Guid } from "guid-typescript";
+
 export class Patient {
-    id: string;
+    id: Guid;
     name: string;
     fileNo: number;
     citizenId: string;

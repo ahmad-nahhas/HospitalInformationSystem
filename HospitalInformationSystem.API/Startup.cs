@@ -21,14 +21,14 @@ namespace HospitalInformationSystem.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddPolicy("Test", builder =>
+                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
+
             services.AddDbContext<HospitalInformationSystemDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
             services.AddControllers();
-
-            services.AddCors(options => options.AddPolicy("Policy", builder =>
-                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -36,10 +36,10 @@ namespace HospitalInformationSystem.API
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
 
+            app.UseCors("Test");
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
-            app.UseCors("Policy");
 
             app.UseEndpoints(endpoints =>
             {

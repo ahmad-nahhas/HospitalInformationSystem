@@ -1,5 +1,7 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
+import { Guid } from 'guid-typescript';
+import { PatientFilter } from 'src/app/filters/patient.filter';
+import { Gender } from 'src/app/models/gender';
 import { PatientsService } from 'src/app/services/patients.service';
 
 @Component({
@@ -8,6 +10,9 @@ import { PatientsService } from 'src/app/services/patients.service';
   styleUrls: ['./patient-details.component.css']
 })
 export class PatientDetailsComponent implements OnInit {
+
+  genderKeys = [0, 1];
+  genderValues = Gender;
 
   constructor(public service: PatientsService) { }
 
@@ -38,13 +43,13 @@ export class PatientDetailsComponent implements OnInit {
   SavePatient() {
     if (this.service.patient.id == null) {
       this.service.post().subscribe(() => {
-        this.service.get()
+        this.service.search(new PatientFilter().search)
       }, error => {
         console.log(error)
       })
     } else {
       this.service.put().subscribe(() => {
-        this.service.get()
+        this.service.search(new PatientFilter().search)
       }, error => {
         console.log(error)
       })
