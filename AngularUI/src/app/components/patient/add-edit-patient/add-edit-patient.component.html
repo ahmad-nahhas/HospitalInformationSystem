@@ -1,0 +1,52 @@
+<div class="form-elements">
+    <div class="row justify-content-center mt-3">
+        <input type="hidden" name="id" [(ngModel)]="patient.id">
+        <input class="col-5" type="text" name="name" [(ngModel)]="patient.name" placeholder="Patient Name">
+        <input class="col-5 ms-3" type="number" name="fileNo" [(ngModel)]="patient.fileNo" placeholder="File No">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="text" name="citizenId" [(ngModel)]="patient.citizenId" placeholder="Citizen Id">
+        <input class="col-5 ms-3" type="text" name="birthDate" [(ngModel)]="patient.birthDate" placeholder="Birth Date"
+            onfocus="(this.type='date')">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <select class="col-5" name="gender" [(ngModel)]="patient.gender">
+            <option *ngFor="let key of genderKey" [ngValue]="key">{{ genderVal[key] }}</option>
+        </select>
+        <input class="col-5 ms-3" type="text" name="natinality" [(ngModel)]="patient.natinality"
+            placeholder="Natinality">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="text" name="phoneNumber" [(ngModel)]="patient.phoneNumber"
+            placeholder="Phone Number">
+        <input class="col-5 ms-3" type="text" name="email" [(ngModel)]="patient.email" placeholder="Email">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="text" name="contactPerson" [(ngModel)]="patient.contactPerson"
+            placeholder="Contact Person">
+        <input class="col-5 ms-3" type="text" name="contactRelation" [(ngModel)]="patient.contactRelation"
+            placeholder="Contact Relation">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="tel" name="contactPhone" [(ngModel)]="patient.contactPhone"
+            placeholder="Contact Phone">
+        <input class="col-5 ms-3" type="text" name="country" [(ngModel)]="patient.country" placeholder="Country">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="text" name="city" [(ngModel)]="patient.city" placeholder="City">
+        <input class="col-5 ms-3" type="text" name="street" [(ngModel)]="patient.street" placeholder="Street">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="text" name="address1" [(ngModel)]="patient.address1" placeholder="Address1">
+        <input class="col-5 ms-3" type="text" name="address2" [(ngModel)]="patient.address2" placeholder="Address2">
+    </div>
+    <div class="row justify-content-center mt-2">
+        <input class="col-5" type="text" name="firstVisitDate" [(ngModel)]="patient.firstVisitDate"
+            placeholder="First Visit Date" onfocus="(this.type='date')">
+        <input *ngIf="patient.id!=null" class="col-5 ms-3" type="text" name="recordCreationDate"
+            [(ngModel)]="patient.recordCreationDate" placeholder="Record Creation Date" onfocus="(this.type='date')">
+    </div>
+    <div class="row justify-content-center mt-4 mb-3 ms-5 me-5">
+        <button class="btn btn-primary btn-lg" type="button" (click)="savePatient()">Save</button>
+    </div>
+</div>
