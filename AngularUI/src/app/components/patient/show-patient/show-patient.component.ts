@@ -60,11 +60,12 @@ export class ShowPatientComponent implements OnInit {
 
   deleteClick(id: any) {
     if (confirm("Are you sure you want to delete this patient's record?")) {
-      this.service.delete(id).subscribe(() => { }, err => {
+      this.service.delete(id).subscribe(() => {
+        this.refreshList();
+      }, err => {
         alert(err.error);
       })
 
-      this.refreshList();
     }
   }
 
