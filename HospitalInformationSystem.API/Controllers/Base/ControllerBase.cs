@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace HospitalInformationSystem.API.Controllers.Base
@@ -21,16 +20,11 @@ namespace HospitalInformationSystem.API.Controllers.Base
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<T>>> Get()
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get()
         {
             try
             {
-                var entities = await _uow.Repository.Get();
-
-                if (entities == null || !entities.Any())
-                    return NotFound($"No any {typeof(T).Name} found!");
-
-                return Ok(entities);
+                return Ok(await _uow.Repository.Get());
             }
             catch
             {
@@ -39,16 +33,11 @@ namespace HospitalInformationSystem.API.Controllers.Base
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<T>>> Get([FromQuery] Filter filter)
+        public virtual async Task<ActionResult<IEnumerable<T>>> Get([FromQuery] Filter filter, [FromHeader] bool usePagination = true)
         {
             try
             {
-                var entities = await _uow.Repository.Get(filter);
-
-                if (entities == null || !entities.Any())
-                    return NotFound($"Any {typeof(T).Name} with these attributes was not found!");
-
-                return Ok(entities);
+                return Ok(await _uow.Repository.Get(filter, usePagination));
             }
             catch
             {
@@ -57,16 +46,14 @@ namespace HospitalInformationSystem.API.Controllers.Base
         }
 
         [HttpGet("{id:Guid}")]
-        public async Task<ActionResult<T>> Get(Guid id)
+        public virtual async Task<ActionResult<T>> Get(Guid id)
         {
             try
             {
                 var entity = await _uow.Repository.Get(id);
 
-                if (entity == null)
-                    return NotFound($"{typeof(T).Name} with Id = {id} not found!");
-
-                return Ok(entity);
+                return (entity == null) ?
+                    NotFound($"{typeof(T).Name} with Id = {id} not found!") : Ok(entity);
             }
             catch
             {
@@ -86,7 +73,9 @@ namespace HospitalInformationSystem.API.Controllers.Base
                     return BadRequest(ModelState);
 
                 var added = await _uow.Repository.Add(entity);
-                return await _uow.Save() == 1 ? Ok(added)/*CreatedAtAction(nameof(Get), new { id = added.Id }, added.Id)*/ : BadRequest(entity);
+
+                return (await _uow.Save() == 1) ?
+                    Ok(added) : BadRequest(entity);
             }
             catch
             {
@@ -95,7 +84,7 @@ namespace HospitalInformationSystem.API.Controllers.Base
         }
 
         [HttpPut]
-        public async Task<ActionResult<T>> Put([FromBody] T entity)
+        public virtual async Task<ActionResult<T>> Put([FromBody] T entity)
         {
             try
             {
@@ -106,7 +95,9 @@ namespace HospitalInformationSystem.API.Controllers.Base
                     BadRequest(ModelState);
 
                 var updated = await _uow.Repository.Update(entity);
-                return await _uow.Save() == 1 ? Ok(updated) : BadRequest(updated);
+
+                return (await _uow.Save() == 1) ?
+                    Ok(updated) : BadRequest(updated);
             }
             catch
             {
@@ -115,20 +106,20 @@ namespace HospitalInformationSystem.API.Controllers.Base
         }
 
         [HttpDelete("{id:Guid}")]
-        public async Task<ActionResult<T>> Delete(Guid id)
+        public virtual async Task<ActionResult<T>> Delete(Guid id)
         {
             try
             {
                 var deleted = await _uow.Repository.Delete(id);
 
-                if (deleted == null)
-                    return NotFound($"{typeof(T).Name} with Id = {id} not found!");
-
-                return await _uow.Save() == 1 ? Ok(deleted) : BadRequest(deleted);
+                return (await _uow.Save() == 1) ?
+                    Ok(deleted) : BadRequest(deleted);
             }
             catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error deleting data");
+                return ((await _uow.Repository.Get(id)) == null) ?
+                    NotFound($"{typeof(T).Name} with Id = {id} not found!") :
+                    StatusCode(StatusCodes.Status500InternalServerError, "Error deleting data");
             }
         }
     }

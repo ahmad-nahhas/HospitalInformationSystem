@@ -19,7 +19,8 @@ namespace HospitalInformationSystem.Shared.Repositories.Base
 
         public async Task<IEnumerable<T>> Get() => await _table.ToListAsync();
 
-        public async Task<IEnumerable<T>> Get(IFilter<T> filter) => await filter.Build(_table).ToListAsync();
+        public async Task<IEnumerable<T>> Get(IFilter<T> filter, bool usePagination) =>
+            await filter.Build(_table, usePagination).ToListAsync();
 
         public async Task<T> Get(object id) => await _table.FindAsync(id);
 
@@ -29,9 +30,9 @@ namespace HospitalInformationSystem.Shared.Repositories.Base
 
         public async Task<T> Update(T entity)
         {
-            await Add(entity);
+            var updated = await Add(entity);
             _context.Entry(entity).State = EntityState.Modified;
-            return entity;
+            return updated;
         }
     }
 }

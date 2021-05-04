@@ -11,7 +11,7 @@ namespace HospitalInformationSystem.Shared.Filters
         public decimal? FileNo { get; set; }
         public string PhoneNumber { get; set; }
 
-        public IQueryable<Patient> Build(IQueryable<Patient> initialSet, bool applyPagination = true)
+        public IQueryable<Patient> Build(IQueryable<Patient> initialSet, bool applyPagination)
         {
             if (!string.IsNullOrWhiteSpace(Name))
                 initialSet = initialSet.Where(i => i.Name.ToLower().Contains(Name.ToLower()));

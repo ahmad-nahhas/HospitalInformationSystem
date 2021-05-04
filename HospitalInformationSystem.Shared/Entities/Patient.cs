@@ -37,7 +37,6 @@ namespace HospitalInformationSystem.Shared.Entities
         [DataType(DataType.Text)]
         public string Natinality { get; set; }
 
-        [Required(ErrorMessage = "Phone Number is required.")]
         [StringLength(15, ErrorMessage = "Phone Number cannot exceed {1} numbers.")]
         [DataType(DataType.PhoneNumber)]
         [Phone]
@@ -61,12 +60,10 @@ namespace HospitalInformationSystem.Shared.Entities
         [Phone]
         public string ContactPhone { get; set; }
 
-        [Required(ErrorMessage = "Country is required.")]
         [StringLength(65, ErrorMessage = "Country cannot exceed {1} characters.")]
         [DataType(DataType.Text)]
         public string Country { get; set; }
 
-        [Required(ErrorMessage = "City is required.")]
         [StringLength(65, ErrorMessage = "City cannot exceed {1} characters.")]
         [DataType(DataType.Text)]
         public string City { get; set; }
