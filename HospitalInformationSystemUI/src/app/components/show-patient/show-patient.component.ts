@@ -23,7 +23,6 @@ export class ShowPatientComponent implements OnInit {
 
   ngOnInit(): void {
     this.search();
-    this.getRecordsCount();
   }
 
   addClick() {
@@ -62,9 +61,7 @@ export class ShowPatientComponent implements OnInit {
   }
 
   next() {
-    this.getRecordsCount();
-
-    if (this.recordsCount > (this.filter.pageNumber * this.filter.pageSize)) {
+    if (this.recordsCount - 1 > (this.filter.pageNumber * this.filter.pageSize)) {
       this.filter.pageNumber++;
       this.search();
     }
@@ -76,6 +73,8 @@ export class ShowPatientComponent implements OnInit {
     }, err => {
       console.log(err);
     });
+
+    this.getRecordsCount();
   }
 
   getRecordsCount() {
