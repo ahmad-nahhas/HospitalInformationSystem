@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { AddEditPatientComponent } from './components/add-edit-patient/add-edit-patient.component';
 import { ShowPatientComponent } from './components/show-patient/show-patient.component';
 import { HttpClientModule } from '@angular/common/http';
-import { SharedService } from './services/shared.service';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -19,7 +18,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [SharedService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

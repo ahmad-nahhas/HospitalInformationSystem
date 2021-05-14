@@ -20,6 +20,7 @@ export class ShowPatientComponent implements OnInit {
   patientList: Patient[] = [];
   filter = new Filter();
   recordsCount = 0;
+  totalPages = 0;
 
   ngOnInit(): void {
     this.search();
@@ -61,7 +62,7 @@ export class ShowPatientComponent implements OnInit {
   }
 
   next() {
-    if (this.recordsCount - 1 > (this.filter.pageNumber * this.filter.pageSize)) {
+    if (this.filter.pageNumber < this.totalPages) {
       this.filter.pageNumber++;
       this.search();
     }
@@ -80,8 +81,19 @@ export class ShowPatientComponent implements OnInit {
   getRecordsCount() {
     this.service.getFiltered(this.filter, false).subscribe(res => {
       this.recordsCount = res.length;
+      this.totalPages = Math.ceil(this.recordsCount / this.filter.pageSize);
     }, err => {
       console.log(err);
     });
+    this.pagesCount();
+  }
+
+  pagesCount() {
+    return new Array(this.totalPages);
+  }
+
+  getPage(pageNumber: number) {
+    this.filter.pageNumber = pageNumber;
+    this.search();
   }
 }

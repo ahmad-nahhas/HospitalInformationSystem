@@ -1,19 +1,6 @@
 export class Filter {
 
-    pageNumber = 1;
-    pageSize = 6;
-    patientName = "";
-    fileNo = 0;
-    phoneNumber = "";
-
-    constructor(pageNumber = 1, pageSize = 6, patientName = "", fileNo = 0, phoneNumber = "") {
-
-        this.pageNumber = pageNumber;
-        this.pageSize = pageSize;
-        this.patientName = patientName;
-        this.fileNo = fileNo;
-        this.phoneNumber = phoneNumber;
-    }
+    constructor(public pageNumber = 1, public pageSize = 6, public patientName = "", public fileNo = 0, public phoneNumber = "") { }
 
     public toString() {
         return "/search?PageNumber=" + ((this.pageNumber <= 0 || (this.pageNumber == null)) ? 1 : this.pageNumber) +

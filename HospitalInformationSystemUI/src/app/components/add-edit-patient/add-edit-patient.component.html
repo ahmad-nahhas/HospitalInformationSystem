@@ -6,8 +6,10 @@
                 #name="ngModel">
             <input class="col-5 ms-3" type="number" name="fileNo" [(ngModel)]="patient.fileNo" required
                 placeholder="File No" #fileNo="ngModel">
-            <div *ngIf="name.invalid && name.errors.required" class="text-danger col-5">Name is required.</div>
-            <div *ngIf="fileNo.invalid && fileNo.errors.required" class="text-danger col-5 ms-3">File No is required.
+            <div *ngIf="name.invalid && name.errors.required && (name.dirty || name.touched)" class="text-danger col-5">
+                Name is required.</div>
+            <div *ngIf="fileNo.invalid && fileNo.errors.required && (fileNo.dirty || fileNo.touched)"
+                class="text-danger col-5 ms-3">File No is required.
             </div>
         </div>
         <div class="row justify-content-center mt-2">
@@ -15,7 +17,8 @@
                 placeholder="Citizen Id" #citizenId="ngModel">
             <input class="col-5 ms-3" type="text" name="birthDate" [(ngModel)]="patient.birthDate"
                 placeholder="Birth Date" onfocus="(this.type='date')">
-            <div *ngIf="citizenId.invalid && citizenId.errors.required" class="text-danger ms-5">Citizen Id is
+            <div *ngIf="citizenId.invalid && citizenId.errors.required && (citizenId.dirty || citizenId.touched)"
+                class="text-danger ms-5">Citizen Id is
                 required.</div>
         </div>
         <div class="row justify-content-center mt-2">

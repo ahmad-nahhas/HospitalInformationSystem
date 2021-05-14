@@ -117,6 +117,9 @@
 
 <!-- Pagination Items -->
 <ul class="pagination justify-content-center mt-4">
-    <li class="page-item" (click)="previous()"><a class="btn btn-outline-primary m-1">Previous</a></li>
-    <li class="page-item" (click)="next()"><a class="btn btn-outline-primary m-1">Next</a></li>
+    <li class="page-item" (click)="previous()"><a class="btn btn-outline-primary">Previous</a></li>
+    <li class="page-item" *ngFor='let in of pagesCount() ;let i = index' (click)="getPage(i+1)">
+        <a class="btn btn-outline-primary">{{i+1}}</a>
+    </li>
+    <li class="page-item" (click)="next()"><a class="btn btn-outline-primary">Next</a></li>
 </ul>
